@@ -1,0 +1,5 @@
+C:/Users/nozdr/source/repos/TBinSearchTree/build/CMakeFiles/test_TBinSearchTree.dir
+C:/Users/nozdr/source/repos/TBinSearchTree/build/CMakeFiles/test_TBSTTable.dir
+C:/Users/nozdr/source/repos/TBinSearchTree/build/CMakeFiles/RUN_TESTS.dir
+C:/Users/nozdr/source/repos/TBinSearchTree/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/nozdr/source/repos/TBinSearchTree/build/CMakeFiles/ZERO_CHECK.dir

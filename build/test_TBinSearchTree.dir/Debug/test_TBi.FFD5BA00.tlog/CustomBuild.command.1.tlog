@@ -1,0 +1,10 @@
+^C:\USERS\NOZDR\SOURCE\REPOS\TBINSEARCHTREE\CMAKELISTS.TXT
+setlocal
+C:\CMake\bin\cmake.exe -SC:/Users/nozdr/source/repos/TBinSearchTree -BC:/Users/nozdr/source/repos/TBinSearchTree/build --check-stamp-file C:/Users/nozdr/source/repos/TBinSearchTree/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

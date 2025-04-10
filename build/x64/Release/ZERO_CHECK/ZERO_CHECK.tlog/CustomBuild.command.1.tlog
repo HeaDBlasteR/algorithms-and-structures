@@ -1,0 +1,10 @@
+^C:\USERS\NOZDR\SOURCE\REPOS\TBINSEARCHTREE\BUILD\CMAKEFILES\EB7DD49CD7CA014EE8D7DB52CA667520\GENERATE.STAMP.RULE
+setlocal
+C:\CMake\bin\cmake.exe -SC:/Users/nozdr/source/repos/TBinSearchTree -BC:/Users/nozdr/source/repos/TBinSearchTree/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/nozdr/source/repos/TBinSearchTree/build/bst_table.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

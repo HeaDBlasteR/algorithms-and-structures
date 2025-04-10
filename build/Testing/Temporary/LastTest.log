@@ -1,0 +1,77 @@
+Start testing: Mar 30 23:16 RTZ 2 (çèìà)
+----------------------------------------------------------
+1/2 Testing: test_TBinSearchTree
+1/2 Test: test_TBinSearchTree
+Command: "C:/Users/nozdr/source/repos/TBinSearchTree/build/Debug/test_TBinSearchTree.exe"
+Directory: C:/Users/nozdr/source/repos/TBinSearchTree/build
+"test_TBinSearchTree" start time: Mar 30 23:16 RTZ 2 (çèìà)
+Output:
+----------------------------------------------------------
+Running main() from C:\Users\nozdr\vcpkg\buildtrees\gtest\src\v1.16.0-a2e0b328c1.clean\googletest\src\gtest_main.cc
+[==========] Running 7 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 7 tests from TBinSearchTreeTest
+[ RUN      ] TBinSearchTreeTest.EmptyTree
+[       OK ] TBinSearchTreeTest.EmptyTree (0 ms)
+[ RUN      ] TBinSearchTreeTest.InsertAndContains
+[       OK ] TBinSearchTreeTest.InsertAndContains (0 ms)
+[ RUN      ] TBinSearchTreeTest.RemoveOperations
+[       OK ] TBinSearchTreeTest.RemoveOperations (0 ms)
+[ RUN      ] TBinSearchTreeTest.UpdateValue
+[       OK ] TBinSearchTreeTest.UpdateValue (0 ms)
+[ RUN      ] TBinSearchTreeTest.ExceptionHandling
+[       OK ] TBinSearchTreeTest.ExceptionHandling (0 ms)
+[ RUN      ] TBinSearchTreeTest.ComplexScenario
+[       OK ] TBinSearchTreeTest.ComplexScenario (0 ms)
+[ RUN      ] TBinSearchTreeTest.CustomTypes
+[       OK ] TBinSearchTreeTest.CustomTypes (0 ms)
+[----------] 7 tests from TBinSearchTreeTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 7 tests from 1 test suite ran. (3 ms total)
+[  PASSED  ] 7 tests.
+<end of output>
+Test time =   0.27 sec
+----------------------------------------------------------
+Test Passed.
+"test_TBinSearchTree" end time: Mar 30 23:16 RTZ 2 (çèìà)
+"test_TBinSearchTree" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/2 Testing: test_TBSTTable
+2/2 Test: test_TBSTTable
+Command: "C:/Users/nozdr/source/repos/TBinSearchTree/build/Debug/test_TBSTTable.exe"
+Directory: C:/Users/nozdr/source/repos/TBinSearchTree/build
+"test_TBSTTable" start time: Mar 30 23:16 RTZ 2 (çèìà)
+Output:
+----------------------------------------------------------
+Running main() from C:\Users\nozdr\vcpkg\buildtrees\gtest\src\v1.16.0-a2e0b328c1.clean\googletest\src\gtest_main.cc
+[==========] Running 6 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 6 tests from TBSTTableTest
+[ RUN      ] TBSTTableTest.InsertAndContains
+[       OK ] TBSTTableTest.InsertAndContains (0 ms)
+[ RUN      ] TBSTTableTest.Remove
+[       OK ] TBSTTableTest.Remove (0 ms)
+[ RUN      ] TBSTTableTest.EmptyTable
+[       OK ] TBSTTableTest.EmptyTable (0 ms)
+[ RUN      ] TBSTTableTest.OperatorBracket
+[       OK ] TBSTTableTest.OperatorBracket (0 ms)
+[ RUN      ] TBSTTableTest.ConstOperatorBracket
+[       OK ] TBSTTableTest.ConstOperatorBracket (0 ms)
+[ RUN      ] TBSTTableTest.ComplexOperations
+[       OK ] TBSTTableTest.ComplexOperations (0 ms)
+[----------] 6 tests from TBSTTableTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 1 test suite ran. (1 ms total)
+[  PASSED  ] 6 tests.
+<end of output>
+Test time =   0.14 sec
+----------------------------------------------------------
+Test Passed.
+"test_TBSTTable" end time: Mar 30 23:16 RTZ 2 (çèìà)
+"test_TBSTTable" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Mar 30 23:16 RTZ 2 (çèìà)

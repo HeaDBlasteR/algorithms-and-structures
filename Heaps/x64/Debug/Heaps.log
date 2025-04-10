@@ -1,0 +1,32 @@
+﻿  main.cpp
+C:\Users\nozdr\source\repos\Heaps\Heaps\MinHeap.h(42,31): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  (компиляция исходного файла "main.cpp")
+      C:\Users\nozdr\source\repos\Heaps\Heaps\MinHeap.h(42,31):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\nozdr\source\repos\Heaps\Heaps\main.cpp(42,18):
+          выполняется компиляция ссылки на экземпляр класс шаблон функции "MinHeap<int>"
+          C:\Users\nozdr\source\repos\Heaps\Heaps\MinHeap.h(40,10):
+          во время компиляции функции-члена класс шаблон "void MinHeap<int>::insert(const T &)"
+          with
+          [
+              T=int
+          ]
+              C:\Users\nozdr\source\repos\Heaps\Heaps\main.cpp(46,20):
+              см. первую ссылку на "MinHeap<int>::insert" в "findKLargest"
+  
+C:\Users\nozdr\source\repos\Heaps\Heaps\MaxHeap.h(42,31): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  (компиляция исходного файла "main.cpp")
+      C:\Users\nozdr\source\repos\Heaps\Heaps\MaxHeap.h(42,31):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\nozdr\source\repos\Heaps\Heaps\main.cpp(10,18):
+          выполняется компиляция ссылки на экземпляр класс шаблон функции "MaxHeap<int>"
+          C:\Users\nozdr\source\repos\Heaps\Heaps\MaxHeap.h(40,10):
+          во время компиляции функции-члена класс шаблон "void MaxHeap<int>::insert(const T &)"
+          with
+          [
+              T=int
+          ]
+              C:\Users\nozdr\source\repos\Heaps\Heaps\main.cpp(14,20):
+              см. первую ссылку на "MaxHeap<int>::insert" в "findKSmallest"
+  
+  Heaps.vcxproj -> C:\Users\nozdr\source\repos\Heaps\x64\Debug\Heaps.exe

@@ -245,6 +245,72 @@ public:
     size_t get_capacity() const { return capacity; }
 };
 
+template<typename HashTable>
+HashTable mergeDictionaries(const std::vector<std::pair<std::string, int>>& table1,
+    const std::vector<std::pair<std::string, int>>& table2,
+    bool preferFirst) {
+    HashTable mergedDict;
+
+    // Сначала вставляем все элементы из предпочитаемой таблицы
+    const auto& preferredTable = preferFirst ? table1 : table2;
+    for (const auto& entry : preferredTable) {
+        mergedDict.insert(entry.first, entry.second);
+    }
+
+    // Затем вставляем элементы из второй таблицы, пропуская дубликаты
+    const auto& secondaryTable = preferFirst ? table2 : table1;
+    for (const auto& entry : secondaryTable) {
+        if (!mergedDict.search(entry.first).first) {
+            mergedDict.insert(entry.first, entry.second);
+        }
+    }
+
+    return mergedDict;
+}
+
+template<typename HashTable>
+void printDictionary(const HashTable& dict, const std::string& title) {
+    std::cout << title << ":\n";
+    dict.print();
+    std::cout << std::endl;
+}
+
 int main() {
+
+    setlocale(LC_ALL, "Russian");
+
+    std::vector<std::pair<std::string, int>> table1 = {
+        {"абажур", 1},
+        {"кинотеатр", 2},
+        {"самолет", 3},
+        {"человек", 4}
+    };
+
+    std::vector<std::pair<std::string, int>> table2 = {
+        {"кинотеатр", 15},
+        {"музыка", 16},
+        {"самолет", 17}
+    };
+
+    {
+        std::cout << "=== Тестирование OpenAddressingHashTable ===" << std::endl;
+
+        auto dict1 = mergeDictionaries<OpenAddressingHashTable<std::string, int>>(table1, table2, true);
+        printDictionary(dict1, "Объединенный словарь (приоритет table1)");
+
+        auto dict2 = mergeDictionaries<OpenAddressingHashTable<std::string, int>>(table1, table2, false);
+        printDictionary(dict2, "Объединенный словарь (приоритет table2)");
+    }
+
+    {
+        std::cout << "=== Тестирование ChainingHashTable ===" << std::endl;
+
+        auto dict1 = mergeDictionaries<ChainingHashTable<std::string, int>>(table1, table2, true);
+        printDictionary(dict1, "Объединенный словарь (приоритет table1)");
+
+        auto dict2 = mergeDictionaries<ChainingHashTable<std::string, int>>(table1, table2, false);
+        printDictionary(dict2, "Объединенный словарь (приоритет table2)");
+    }
+
     return 0;
 }

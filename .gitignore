@@ -1,1 +1,15 @@
 .vs/
+x64/
+Hash_Tables/x64/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+[Xx]64/
+[Xx]86/
+[Bb]in/
+[Oo]bj/
+*.pdb
+*.ilk
+*.log
+*.obj

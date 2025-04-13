@@ -1,3 +1,5 @@
+//Дан массив mass размера n и положительное число k.Требуется эффективно найти k наибольших / наименьших элементов массива.
+
 #include <iostream>
 #include "MaxHeap.h"
 #include "MinHeap.h"
@@ -41,12 +43,10 @@ std::vector<int> findKLargest(const std::vector<int>& mass, int k) {
 
     MinHeap<int> heap;
 
-    // Добавляем первые k элементов
     for (int i = 0; i < k; ++i) {
         heap.insert(mass[i]);
     }
 
-    // Обрабатываем остальные элементы
     for (int i = k; i < mass.size(); ++i) {
         if (mass[i] > heap.getMin()) {
             heap.extractMin();
@@ -54,7 +54,6 @@ std::vector<int> findKLargest(const std::vector<int>& mass, int k) {
         }
     }
 
-    // Извлекаем результаты из кучи
     std::vector<int> result;
     while (!heap.isEmpty()) {
         result.push_back(heap.extractMin());

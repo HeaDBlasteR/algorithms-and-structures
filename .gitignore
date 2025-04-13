@@ -2,6 +2,8 @@
 .vs/
 x64/
 Heaps/x64/
+x64/Debug
+x64/Release
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/

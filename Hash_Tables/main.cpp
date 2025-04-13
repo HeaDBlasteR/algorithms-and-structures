@@ -1,8 +1,103 @@
 #include <iostream>
 #include <vector>
-#include <optional>
 #include <list>
 #include <utility>
+#include <map>
+#include <sstream>
+#include <algorithm>
+#include <cmath>
+
+class Polynomial {
+private:
+    std::map<int, double> terms; // ключ - степень, значение - коэффициент
+
+public:
+    Polynomial() {}
+
+    Polynomial(const std::map<int, double>& terms) : terms(terms) {}
+
+    // Добавление монома
+    void addTerm(int exponent, double coefficient) {
+        if (coefficient != 0.0) {
+            terms[exponent] += coefficient;
+            if (terms[exponent] == 0.0) {
+                terms.erase(exponent);
+            }
+        }
+    }
+
+    std::string toString() const {
+        if (terms.empty()) {
+            return "0";
+        }
+
+        std::stringstream ss;
+        bool firstTerm = true;
+
+        for (std::map<int, double>::const_reverse_iterator it = terms.rbegin(); it != terms.rend(); ++it) {
+            int exponent = it->first;
+            double coefficient = it->second;
+
+            if (!firstTerm) {
+                ss << (coefficient >= 0 ? " + " : " - ");
+            }
+            else if (coefficient < 0) {
+                ss << "-";
+            }
+
+            double absCoeff = std::abs(coefficient);
+            if (absCoeff != 1.0 || exponent == 0) {
+                if (absCoeff == floor(absCoeff)) {
+                    ss << static_cast<int>(absCoeff);
+                }
+                else {
+                    ss << absCoeff;
+                }
+            }
+
+            if (exponent > 0) {
+                ss << "x";
+                if (exponent > 1) {
+                    ss << "^" << exponent;
+                }
+            }
+
+            firstTerm = false;
+        }
+
+        return ss.str();
+    }
+
+    bool operator==(const Polynomial& other) const {
+        return terms == other.terms;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Polynomial& poly) {
+        os << poly.toString();
+        return os;
+    }
+
+    const std::map<int, double>& getTerms() const {
+        return terms;
+    }
+};
+
+namespace std {
+    template<>
+    struct hash<Polynomial> {
+        size_t operator()(const Polynomial& poly) const {
+            size_t h = 0;
+            const std::map<int, double>& terms = poly.getTerms();
+            for (std::map<int, double>::const_iterator it = terms.begin(); it != terms.end(); ++it) {
+                size_t term_hash = hash<int>()(it->first);
+                term_hash ^= hash<double>()(it->second) + 0x9e3779b9 + (term_hash << 6) + (term_hash >> 2);
+
+                h ^= term_hash + 0x9e3779b9 + (h << 6) + (h >> 2);
+            }
+            return h;
+        }
+    };
+}
 
 template<typename K, typename V>
 class OpenAddressingHashTable {
@@ -276,40 +371,96 @@ void printDictionary(const HashTable& dict, const std::string& title) {
 }
 
 int main() {
-
     setlocale(LC_ALL, "Russian");
 
-    std::vector<std::pair<std::string, int>> table1 = {
-        {"абажур", 1},
-        {"кинотеатр", 2},
-        {"самолет", 3},
-        {"человек", 4}
-    };
+    // Тестирование со строками и числами
+    std::vector<std::pair<std::string, int> > table1;
+    table1.push_back(std::make_pair("абажур", 1));
+    table1.push_back(std::make_pair("кинотеатр", 2));
+    table1.push_back(std::make_pair("самолет", 3));
+    table1.push_back(std::make_pair("человек", 4));
 
-    std::vector<std::pair<std::string, int>> table2 = {
-        {"кинотеатр", 15},
-        {"музыка", 16},
-        {"самолет", 17}
-    };
+    std::vector<std::pair<std::string, int> > table2;
+    table2.push_back(std::make_pair("кинотеатр", 15));
+    table2.push_back(std::make_pair("музыка", 16));
+    table2.push_back(std::make_pair("самолет", 17));
 
     {
         std::cout << "=== Тестирование OpenAddressingHashTable ===" << std::endl;
 
-        auto dict1 = mergeDictionaries<OpenAddressingHashTable<std::string, int>>(table1, table2, true);
+        OpenAddressingHashTable<std::string, int> dict1 =
+            mergeDictionaries<OpenAddressingHashTable<std::string, int> >(table1, table2, true);
         printDictionary(dict1, "Объединенный словарь (приоритет table1)");
 
-        auto dict2 = mergeDictionaries<OpenAddressingHashTable<std::string, int>>(table1, table2, false);
+        OpenAddressingHashTable<std::string, int> dict2 =
+            mergeDictionaries<OpenAddressingHashTable<std::string, int> >(table1, table2, false);
         printDictionary(dict2, "Объединенный словарь (приоритет table2)");
     }
 
     {
         std::cout << "=== Тестирование ChainingHashTable ===" << std::endl;
 
-        auto dict1 = mergeDictionaries<ChainingHashTable<std::string, int>>(table1, table2, true);
+        ChainingHashTable<std::string, int> dict1 =
+            mergeDictionaries<ChainingHashTable<std::string, int> >(table1, table2, true);
         printDictionary(dict1, "Объединенный словарь (приоритет table1)");
 
-        auto dict2 = mergeDictionaries<ChainingHashTable<std::string, int>>(table1, table2, false);
+        ChainingHashTable<std::string, int> dict2 =
+            mergeDictionaries<ChainingHashTable<std::string, int> >(table1, table2, false);
         printDictionary(dict2, "Объединенный словарь (приоритет table2)");
+    }
+
+    // Тестирование с полиномами
+    {
+        std::cout << "\n=== Тестирование хранения полиномов в OpenAddressingHashTable ===" << std::endl;
+
+        OpenAddressingHashTable<std::string, Polynomial> polyTable;
+
+        Polynomial p1;
+        p1.addTerm(2, 3.0);
+        p1.addTerm(1, -2.0);
+        p1.addTerm(0, 5.0);
+
+        Polynomial p2;
+        p2.addTerm(3, 1.0);
+        p2.addTerm(1, 4.0);
+
+        polyTable.insert("Полином 1", p1);
+        polyTable.insert("Полином 2", p2);
+
+        std::cout << "Содержимое таблицы:" << std::endl;
+        polyTable.print();
+
+        std::pair<bool, Polynomial> searchResult = polyTable.search("Полином 1");
+        if (searchResult.first) {
+            std::cout << "\nНайден полином: " << searchResult.second.toString() << std::endl;
+        }
+    }
+
+    {
+        std::cout << "\n=== Тестирование хранения полиномов в ChainingHashTable ===" << std::endl;
+
+        ChainingHashTable<Polynomial, std::string> polyTable;
+
+        Polynomial p1;
+        p1.addTerm(2, 3.0);
+        p1.addTerm(1, -2.0);
+        p1.addTerm(0, 5.0);
+
+        Polynomial p2;
+        p2.addTerm(3, 1.0);
+        p2.addTerm(1, 4.0);
+
+        polyTable.insert(p1, "Описание полинома 1");
+        polyTable.insert(p2, "Описание полинома 2");
+
+        std::cout << "Содержимое таблицы:" << std::endl;
+        polyTable.print();
+
+        std::pair<bool, std::string> searchResult = polyTable.search(p1);
+        if (searchResult.first) {
+            std::cout << "\nНайдено описание: " << searchResult.second
+                << " для полинома " << p1.toString() << std::endl;
+        }
     }
 
     return 0;

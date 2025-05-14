@@ -1,3 +1,0 @@
-test_TBinSearchTree 1 0.273902
-test_TBSTTable 1 0.0851984
----

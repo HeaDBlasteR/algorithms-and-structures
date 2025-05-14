@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <chrono>
 
 TEST(TBinSearchTreeTest, EmptyTree) {
     TBinSearchTree<int, std::string> tree;
@@ -29,7 +30,7 @@ TEST(TBinSearchTreeTest, RemoveOperations) {
 
     EXPECT_TRUE(tree.remove(1));
     EXPECT_FALSE(tree.contains(1));
-    EXPECT_FALSE(tree.remove(1));  // Повторное удаление
+    EXPECT_FALSE(tree.remove(1));
     EXPECT_TRUE(tree.remove(2));
     EXPECT_TRUE(tree.empty());
 }
@@ -91,7 +92,6 @@ TEST(TBinSearchTreeTest, LargeDatasetRandomized) {
     TBinSearchTree<int, int> tree;
     const int count = 100000;
 
-    // Генератор случайных чисел
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, count * 10);
@@ -148,6 +148,6 @@ TEST(TBinSearchTreeTest, PerformanceInsertRandomized) {
 
     std::cout << "[ RESULT ] Total insert time: " << total_duration.count() << " ms\n"
         << "           Average time per insert: "
-        << (total_duration.count() * 1000.0 / count) << " μs\n"
+        << (total_duration.count() * 1000.0 / count) << " us\n"
         << "           Final tree depth: " << tree.maxDepth() << "\n";
 }

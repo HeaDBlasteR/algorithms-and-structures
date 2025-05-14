@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 3.30.3)
 project(bst_table LANGUAGES CXX)
 
-# Указываем путь к vcpkg
 set(CMAKE_TOOLCHAIN_FILE "C:/Users/nozdr/vcpkg/scripts/buildsystems/vcpkg.cmake")
 
-# Настройка Google Test
 find_package(GTest REQUIRED)
 
 # Общие настройки

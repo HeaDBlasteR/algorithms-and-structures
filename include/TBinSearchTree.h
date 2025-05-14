@@ -69,7 +69,7 @@ public:
                 current = &(*current)->right;
             }
             else {
-                (*current)->value = value; // Обновление значения
+                (*current)->value = value;
                 return;
             }
         }

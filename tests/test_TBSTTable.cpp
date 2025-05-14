@@ -49,7 +49,7 @@ TEST(TBSTTableTest, OperatorBracket) {
 
     // Проверка создания элемента при обращении
     EXPECT_FALSE(table.contains(2));
-    std::string value = table[2];  // Создаст элемент с default-значением
+    std::string value = table[2];
     EXPECT_TRUE(table.contains(2));
     EXPECT_TRUE(value.empty());
 }
